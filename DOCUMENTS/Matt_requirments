@@ -1,0 +1,34 @@
+Project members
+    R-E Miller - (not sure client,server,lib)
+    Elliot Swan - (not sure client,server,lib)
+    Matthew Hill - (not sure client,server,lib)
+
+Communication plan
+    Communication will happen through a combination on in person meetings at the library and online meetings held through discord.
+    The code will be shared through github so everyteam member can acesses the code
+
+Tasks Involved/Team members assigned for each task and time to complete
+        Side Note - Keep track of time as an actual completion time is submitted at the end of the project
+    Server Tasks
+
+    Client Tasks
+
+    Shared Tasks
+
+Programming Language
+    The Server, Client, and Library will all be written in Python
+
+Project Requirements (scope)
+
+Application Input and Outputs
+
+List of functionalities that will be common to both client and server
+    Both will need functions for sending and receiving messages that will need to be encoded and decoded on either send or receive respectively. 
+    The server and client will need message formatting to display the messages.
+    Both will need an Authentication method for username and personal in the chat 
+
+Application protocol
+
+Sequence diagram
+
+Test plan
