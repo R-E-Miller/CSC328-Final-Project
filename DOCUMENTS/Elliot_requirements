@@ -1,0 +1,45 @@
+Project Requirements (scope):
+  -A working client/server chatroom
+  - Client Requirements
+    - Clients can choose a nickname given that it isn't taken
+    - Clients will have a clean user interface
+    - Clients will have access to older messages if they ask to receive them (/logs?)
+    - Clients will be able to seamlessly exit the program. Either with a command or ctrl-c
+    - The following are optional
+    - Clients can clear their messages using a designated command. (/clear?)
+    - User lists for clients?
+    - Direct Messages? Would be hard to track but interesting to add.
+  - Server Requirements 
+    - Server will be able to store a chat log in a text file
+    - Server will be able to verify user nicknames against other user names. This must be non blocking
+    - Server will be able to gracefully shut down, sending messages to clients before termination
+    - Server will be able to handle receiving multiple messages at a time
+    - Server will be able to handle a maximum of people ********************** DECIDE WITH GROUP
+    - The following are optional: 
+    - The server operator may be able to act as a moderator?
+
+
+Application Inputs and Outputs:
+  Client program user inputs:
+    - Client program should be able to get input through the curses module.
+      - Provided the curses module works as intended, There will be an area where
+        the user will be able to type any inputs into a text box. The user can escape this using 
+        escape. The user could then bring up a user list or a manual. Direct messages could be interesting.
+      - Commands can be executed through the syntax /command (This will cause certain combinations to be untypable on their own) 
+        or through key combination (ctrl-C)
+    - Client program outputs to the user:
+      - The client program will output a user interface by use of the curses module
+      - There will be a space for user input at the bottom of the screen 
+      - Above space for messages to be typed, there will be space for messages from other users
+        to be displayed
+      
+    - Server program user inputs:
+      - Provided we do decided to make it a moderator type thing
+      - there will be a command to print user nicknames
+      - command to disconnect users
+    - Server program outputs to user:
+      - The server should output whenever there is a connect or disconnect
+      - The server maybe should print that it is broadcasting a message
+
+
+
