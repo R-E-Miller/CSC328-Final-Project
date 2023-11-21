@@ -62,4 +62,13 @@ Application Protocol:
     - In basic operation, the server will receive a JSON packet and then simply push it to every single user.
     - If a user sends a packet that contains /exit it will terminate that connection and remove the nickname from the list of nicknames
 
-
+Testing:
+|Test Case|Brief|Input|Expected Output|
+|---|---|---|---|
+|1|Successful Login|myUser|Successful Connection to chatroom|
+|2|Invalid Login|None (Reserved or duplicate name)|Retry Username|
+|3|Receive Message|Hello World|Every user receives the message packet "Hello World"|
+|4|Send Messages|Hello World|Server receives the message packet "Hello World"|
+|5|Joining late/retrieve logs|\logs|Should a user type a command, it will retrieve logs|
+|6|Invalid Command|\notcmd|If a user types a command(\command) incorrectly, the program will show an error message|
+|7|User input Will not be lost on message receive|None|Clean UI as described before|
