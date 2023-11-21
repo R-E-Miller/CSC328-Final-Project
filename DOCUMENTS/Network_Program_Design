@@ -1,7 +1,7 @@
 Project members
-    R-E Miller - (not sure client,server,lib)
-    Elliot Swan - (not sure client,server,lib)
-    Matthew Hill - (not sure client,server,lib)
+    R-E Miller 
+    Elliot Swan 
+    Matthew Hill
 
 Communication plan
     Communication will happen through a combination on in person meetings at the library and online meetings held through discord.
@@ -9,11 +9,12 @@ Communication plan
 
 Tasks Involved/Team members assigned for each task and time to complete
         Side Note - Keep track of time as an actual completion time is submitted at the end of the project
-    Server Tasks
-
-    Client Tasks
-
-    Shared Tasks
+    Server Tasks -  Matt Hill
+      - Create server, verify names, handle multiple connections, gracefully shutdown
+    Client Tasks - R-E Miller
+      - Connect to server, decide on name, send and receive messages, disconnect
+    Shared Tasks/curses integration - Elliot Swan
+      - encode/decode JSON packets, Send/receive JSON packets, research and design UI in curses 
 
 Programming Language
     The Server, Client, and Library will all be written in Python
@@ -34,7 +35,7 @@ Project Requirements (scope):
     - Server will be able to verify user nicknames against other user names. This must be non blocking
     - Server will be able to gracefully shut down, sending messages to clients before termination
     - Server will be able to handle receiving multiple messages at a time
-    - Server will be able to handle a maximum of people ********************** DECIDE WITH GROUP
+    - Server will be able to handle a maximum of people of 10 for the time being
     - The following are optional: 
     - The server operator may be able to act as a moderator?
 
