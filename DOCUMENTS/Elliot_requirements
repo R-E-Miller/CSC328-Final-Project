@@ -41,5 +41,25 @@ Application Inputs and Outputs:
       - The server should output whenever there is a connect or disconnect
       - The server maybe should print that it is broadcasting a message
 
+Application Protocol:
+  -The lynchpin of the communication will come from JSON packets.
+    -JSON Packets use:
+      - NICK: the nickname 
+      - MSG: The message
+  -Client to server
+    - On  connect the client will wait for a connect confirmation message from the server. It then enters the nickname confirmation loop.
+    - On connect NICK is None (Requires testing)
+    - NICK will not be set until approved by the server. 
+    - Connect MSG  will always be the name the user selects until it is approved
+    - Basic client server interaction will be a JSON packet structured as above.
+    - If the client receives a packet of it's own nickname it will be used as a 
+      verification that it's own message was sent.
+    - Otherwise it will print the nickname from the sender followed by the MSG.
+    - If the MSG is /exit the client will terminate
+  -Server to client
+    - On connect the server will send a message to the client.
+    - The server will verify the user's nickname 
+    - In basic operation, the server will receive a JSON packet and then simply push it to every single user.
+    - If a user sends a packet that contains /exit it will terminate that connection and remove the nickname from the list of nicknames
 
 
