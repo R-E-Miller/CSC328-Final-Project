@@ -46,8 +46,10 @@ def main():
 
 def verify_name(connection):
     connection.sendall(b"HELLO")
-    nick = connection.read(1024)
+    nick = connection.recv(1024)
     print(nick)
+    connection.sendall(b'READY')
+
     return(connection, nick)
 
 
