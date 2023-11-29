@@ -2,6 +2,7 @@
 import socket
 import select
 import sys
+import shared as sh
 
 def send_message(sock, message):
     try:
