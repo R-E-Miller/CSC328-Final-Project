@@ -3,25 +3,6 @@ import select
 import sys
 
 def send_message(sock, message):
-    """Send a message to the server."""
-    try:
-        sock.sendall(message.encode())
-    except socket.error as e:
-        print(f"Error sending message: {e}")
-
-def main():
-    if len(sys.argv) != 3:
-        print("Usage: python client.py <host> <port>")
-        sys.exit()
-
-    host, port = sys.argv[1], int(sys.argv[2])
-
-import socket
-import select
-import sys
-
-def send_message(sock, message):
-    """Send a message to the server."""
     try:
         sock.sendall(message.encode())
     except socket.error as e:
@@ -39,7 +20,7 @@ def main():
             sock.connect((host, port))
             print("Connected to the server.")
 
-            # Handle nickname setup loop stuffz
+            # Handle nickname setup loop
             while True:
                 nickname = input("Enter your nickname: ").strip()
                 if nickname:
@@ -54,7 +35,7 @@ def main():
                         print("Unexpected response from server.")
                         continue
 
-            # Main loop for sending and receiving message stuffz (removed this being within its own with try)
+            # Main loop for sending and receiving messages
             while True:
                 sockets_list = [sys.stdin, sock]
                 read_sockets, _, _ = select.select(sockets_list, [], [])
@@ -71,18 +52,6 @@ def main():
                         message = sys.stdin.readline().strip()
                         if message:
                             send_message(sock, message)
-
-        except KeyboardInterrupt:
-            send_message(sock, "BYE")
-            print("Disconnected from the server.")
-        except Exception as e:
-            print(f"An error occurred: {e}")
-        finally:
-            sock.close()
-
-if __name__ == "__main__":
-    main()
-
 
         except KeyboardInterrupt:
             send_message(sock, "BYE")
