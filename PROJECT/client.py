@@ -26,7 +26,7 @@ def main():
             if "HELLO" in hello_message:
                 print(hello_message)
             else:
-                print("Did not receive expected greeting from server.")
+                print("Did not receive HELLO..")
                 return
 
             # Handle nickname setup loop
