@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 # R-E Miller (IT), Matthew Hill (CS), Elliot Swan (CS)
 import socket 
 import select
@@ -13,6 +14,7 @@ def check_nick(s, storedname):
             message = "DENIED"
             name = "SERVER"
             sh.send_message(s,message, name)
+            connection.sendall(b"HELLO")
     #store = s.recv()
     #nick = json.load(store)
     #print(nick)
@@ -41,7 +43,7 @@ def main():
                 with connection:
                     print("Got connection")
                     check_nick(s, nickname )
-                    verify_name(connection)
+                    #verify_name(connection)
             
     except OSError as e:
         print(e)
