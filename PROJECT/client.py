@@ -36,12 +36,12 @@ def main():
                     send_message(sock, f"NICK:{nickname}")
                     response = sock.recv(1024).decode()
                     if response == "READY":
-                        print("Nickname accepted.")
+                        print(response)
                         break
                     elif response == "RETRY":
-                        print("Nickname already in use, please try a different one.")
+                        print(response)
                     else:
-                        print("Unexpected response from server.")
+                        print("Error: Unexpected response from server!")
                         continue
 
             # Main loop for sending and receiving messages
@@ -53,7 +53,7 @@ def main():
                     if notified_socket == sock:
                         message = sock.recv(1024)
                         if not message:
-                            print("Disconnected from server.")
+                            print("Disconnected from server!")
                             sys.exit()
                         else:
                             print(message.decode())
@@ -64,7 +64,7 @@ def main():
 
         except KeyboardInterrupt:
             send_message(sock, "BYE")
-            print("Disconnected from the server.")
+            print("BYE")
         except Exception as e:
             print(f"An error occurred: {e}")
         finally:
