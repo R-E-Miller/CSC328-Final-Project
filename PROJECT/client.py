@@ -59,9 +59,7 @@ def main():
                         else:
                             print(message.decode())
                     else:
-                        message = sys.stdin.readline().strip()
-                        if message:
-                            send_message(sock, message)
+                        sh.send_message()
 
         except KeyboardInterrupt:
             send_message(sock, "BYE")
