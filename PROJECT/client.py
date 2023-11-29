@@ -21,6 +21,14 @@ def main():
             sock.connect((host, port))
             print("Connected to the server.")
 
+            # Wait for HELLO message from the server
+            hello_message = sock.recv(1024).decode()
+            if "HELLO" in hello_message:
+                print(hello_message)
+            else:
+                print("Did not receive expected greeting from server.")
+                return
+
             # Handle nickname setup loop
             while True:
                 nickname = input("Enter your nickname: ").strip()
