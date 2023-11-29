@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # R-E Miller (IT), Matthew Hill (CS), Elliot Swan (CS)
 import socket 
 import select
@@ -8,13 +7,15 @@ import shared as sh
 
 def check_nick(s, storedname):
     #read nickname from the client
+    world = "HELLO"
+    name = "SERVER"
+    sh.send_message(s,world, name)
     nic,msg = sh.read_message(s)
     for i in storedname:
         if msg == i:
             message = "DENIED"
             name = "SERVER"
             sh.send_message(s,message, name)
-            connection.sendall(b"HELLO")
     #store = s.recv()
     #nick = json.load(store)
     #print(nick)
