@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 # R-E Miller (IT), Matthew Hill (CS), Elliot Swan (CS)
 import socket 
 import select
