@@ -1,15 +1,21 @@
-#!/usr/bin/env python3
 # R-E Miller (IT), Matthew Hill (CS), Elliot Swan (CS)
 import socket 
 import select
 import sys
 import json
+import shared as sh
 
 def check_nick(s, storedname):
     #read nickname from the client
-    store = s.recv()
-    nick = json.load(store)
-    print(nick)
+    nic,msg = sh.read_message(s)
+    for i in storedname:
+        if msg == i:
+            message = "DENIED"
+            name = "SERVER"
+            sh.send_message(s,message, name)
+    #store = s.recv()
+    #nick = json.load(store)
+    #print(nick)
 
     # check nickname if nickname is taken 
     #reply back with either approved name or already taken
@@ -34,7 +40,7 @@ def main():
                 connection, _ = s.accept()
                 with connection:
                     print("Got connection")
-                    #check_nick(s, nickname )
+                    check_nick(s, nickname )
                     verify_name(connection)
             
     except OSError as e:
@@ -46,10 +52,8 @@ def main():
 
 def verify_name(connection):
     connection.sendall(b"HELLO")
-    nick = connection.recv(1024)
+    nick = connection.read(1024)
     print(nick)
-    connection.sendall(b'READY')
-
     return(connection, nick)
 
 
