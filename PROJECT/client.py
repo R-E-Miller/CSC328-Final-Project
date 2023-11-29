@@ -58,13 +58,13 @@ def main():
                         if message:
                             send_message(sock, message)
 
-        except KeyboardInterrupt:
-            send_message(sock, "BYE")
-            print("Disconnected from the server.")
-        except Exception as e:
-            print(f"An error occurred: {e}")
-        finally:
-            sock.close()
+    except KeyboardInterrupt:
+        send_message(sock, "BYE")
+        print("Disconnected from the server.")
+    except Exception as e:
+        print(f"An error occurred: {e}")
+    finally:
+        sock.close()
 
 if __name__ == "__main__":
     main()
