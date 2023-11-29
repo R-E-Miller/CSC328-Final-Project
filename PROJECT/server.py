@@ -32,7 +32,7 @@ def main():
             while True:
                 connection, _ = s.accept()
                 with connection:
-                    print("Got connection", info)
+                    print("Got connection")
                     #check_nick(s, nickname )
                     verify_name(connection)
             
