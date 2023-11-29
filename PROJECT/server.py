@@ -41,7 +41,7 @@ def main():
                 with connection:
                     print("Got connection")
                     check_nick(s, nickname )
-                    verify_name(connection)
+                    #verify_name(connection)
             
     except OSError as e:
         print(e)
