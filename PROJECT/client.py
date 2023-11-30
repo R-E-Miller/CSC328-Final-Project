@@ -4,12 +4,6 @@ import select
 import sys
 import shared as sh
 
-#def send_message(sock, message):
-#    try:
-#        sock.sendall(message.encode())
-#    except socket.error as e:
-#        print(f"Error sending message: {e}")
-
 def main():
     if len(sys.argv) != 3:
         print("Usage: python client.py <host> <port>")
@@ -46,22 +40,6 @@ def main():
                     else:
                         print("Error: Unexpected response from server!")
                         continue
-
-            # Main loop for sending and receiving messages
-            #while True:
-                #sockets_list = [sys.stdin, sock]
-                #read_sockets, _, _ = select.select(sockets_list, [], [])
-                #
-                    #for notified_socket in read_sockets:
-                        #if notified_socket == sock:
-                        #message = sock.recv(1024)
-                        #if not message:
-                        #    print("Disconnected from server!")
-                        #    sys.exit()
-                        #else:
-                    #    print(message.decode())
-                        #else:
-            #sh.send_message()
 
         except KeyboardInterrupt:
             sh.send_message(sock, "BYE", nickname)
