@@ -3,6 +3,8 @@ import socket
 import select
 import sys
 import shared as sh
+#JUST TO GET THIS TO WORK I AM ADDING A PLACEHOLDER FOR PROTO
+proto = ''
 
 def main():
     if len(sys.argv) != 3:
@@ -18,7 +20,7 @@ def main():
 
             # Wait for HELLO message from the server
             print("going to try to read from server")
-            serverName, hello_message = sh.read_message(sock)
+            serverName, hello_message, proto = sh.read_message(sock)
             if "HELLO" in hello_message:
                 print(hello_message)
             else:
@@ -30,8 +32,8 @@ def main():
                 nickname = input("Enter your nickname: ").strip()
                 if nickname:
                     #send_message(sock, f"NICK:{nickname}")
-                    sh.send_message(sock, nickname, None)
-                    serverName, response = sh.read_message(sock)
+                    sh.send_message(sock, nickname, None, proto)
+                    serverName, response, proto = sh.read_message(sock)
                     if response == "READY":
                         print(response)
                         break
@@ -42,7 +44,7 @@ def main():
                         continue
 
         except KeyboardInterrupt:
-            sh.send_message(sock, "BYE", nickname)
+            sh.send_message(sock, "BYE", nickname, proto)
             print("BYE")
         except Exception as e:
             print(f"An error occurred: {e}")

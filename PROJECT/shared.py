@@ -2,10 +2,10 @@
 import socket
 import json
 
-def send_message(connection, msg, nick):
+def send_message(connection, msg, nick, proto):
     if nick == None:
         nick = "None"
-    myData = {'msg': msg, 'nick': nick}
+    myData = {'msg': msg, 'nick': nick, 'proto':proto}
     myMsg = json.dumps(myData) 
     myMsg = myMsg.encode()
     #myMsg = myMsg.decode()
@@ -27,10 +27,11 @@ def read_message(connection):
     print(f'received: {receivedMsg}')
     msg = receivedMsg['msg']
     nick = receivedMsg['nick']
+    proto = receivedMsg['proto']
 
     #msg = receivedMsg['msg']
     #nick = receivedMsg['nick']
-    return (nick, msg)
+    return (nick, msg, proto)
 
 def true_read(connection, numToRead):
     bytesRead = b''
