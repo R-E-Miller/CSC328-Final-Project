@@ -11,11 +11,12 @@ def check_nick(s, storedname):
     name = "SERVER"
     sh.send_message(s,world, name)
     nic,msg = sh.read_message(s)
-    for i in storedname:
-        if msg == i:
-            message = "DENIED"
-            name = "SERVER"
-            sh.send_message(s,message, name)
+    sh.send_message(s, "READY", "SERVER")
+    #for i in storedname:
+    #    if msg == i:
+    #        message = "DENIED"
+    #        name = "SERVER"
+    #        sh.send_message(s,message, name)
     #store = s.recv()
     #nick = json.load(store)
     #print(nick)
@@ -43,7 +44,7 @@ def main():
                 connection, _ = s.accept()
                 with connection:
                     print("Got connection")
-                    check_nick(s, nickname )
+                    check_nick(connection, nickname )
                     #verify_name(connection)
             
     except OSError as e:
@@ -53,11 +54,6 @@ def main():
 
 
 
-def verify_name(connection):
-    connection.sendall(b"HELLO")
-    nick = connection.read(1024)
-    print(nick)
-    return(connection, nick)
 
 
 

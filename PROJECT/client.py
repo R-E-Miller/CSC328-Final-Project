@@ -4,11 +4,11 @@ import select
 import sys
 import shared as sh
 
-def send_message(sock, message):
-    try:
-        sock.sendall(message.encode())
-    except socket.error as e:
-        print(f"Error sending message: {e}")
+#def send_message(sock, message):
+#    try:
+#        sock.sendall(message.encode())
+#    except socket.error as e:
+#        print(f"Error sending message: {e}")
 
 def main():
     if len(sys.argv) != 3:
@@ -23,7 +23,8 @@ def main():
             print("Connected to the server.")
 
             # Wait for HELLO message from the server
-            hello_message = sock.recv(1024).decode()
+            print("going to try to read from server")
+            serverName, hello_message = sh.read_message(sock)
             if "HELLO" in hello_message:
                 print(hello_message)
             else:
@@ -34,8 +35,9 @@ def main():
             while True:
                 nickname = input("Enter your nickname: ").strip()
                 if nickname:
-                    send_message(sock, f"NICK:{nickname}")
-                    response = sock.recv(1024).decode()
+                    #send_message(sock, f"NICK:{nickname}")
+                    sh.send_message(sock, nickname, None)
+                    serverName, response = sh.read_message(sock)
                     if response == "READY":
                         print(response)
                         break
@@ -46,23 +48,23 @@ def main():
                         continue
 
             # Main loop for sending and receiving messages
-            while True:
-                sockets_list = [sys.stdin, sock]
-                read_sockets, _, _ = select.select(sockets_list, [], [])
-
-                for notified_socket in read_sockets:
-                    if notified_socket == sock:
-                        message = sock.recv(1024)
-                        if not message:
-                            print("Disconnected from server!")
-                            sys.exit()
-                        else:
-                            print(message.decode())
-                    else:
-                        sh.send_message()
+            #while True:
+                #sockets_list = [sys.stdin, sock]
+                #read_sockets, _, _ = select.select(sockets_list, [], [])
+                #
+                    #for notified_socket in read_sockets:
+                        #if notified_socket == sock:
+                        #message = sock.recv(1024)
+                        #if not message:
+                        #    print("Disconnected from server!")
+                        #    sys.exit()
+                        #else:
+                    #    print(message.decode())
+                        #else:
+            #sh.send_message()
 
         except KeyboardInterrupt:
-            send_message(sock, "BYE")
+            sh.send_message(sock, "BYE", nickname)
             print("BYE")
         except Exception as e:
             print(f"An error occurred: {e}")
