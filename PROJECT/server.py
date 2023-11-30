@@ -7,20 +7,19 @@ import shared as sh
 
 def check_nick(s, storedname):
     #read nickname from the client
+    bannedname = ["SERVER"]
     world = "HELLO"
     name = "SERVER"
     sh.send_message(s,world, name)
-    nic,msg = sh.read_message(s)
-    sh.send_message(s, "READY", "SERVER")
-    #for i in storedname:
-    #    if msg == i:
-    #        message = "DENIED"
-    #        name = "SERVER"
-    #        sh.send_message(s,message, name)
-    #store = s.recv()
-    #nick = json.load(store)
-    #print(nick)
-
+    message = ""
+    while message != "READY":
+        nic,msg = sh.read_message(s)
+        if msg in storedname or msg in bannedname: 
+            message = "RETRY"
+            sh.send_message(s, message, name)
+            continue
+        message = "READY"
+        sh.send_message(s, message, name)
     # check nickname if nickname is taken 
     #reply back with either approved name or already taken
     #
@@ -45,12 +44,12 @@ def main():
                 with connection:
                     print("Got connection")
                     check_nick(connection, nickname )
-                    #verify_name(connection)
+                    print("SERVER TIME")
             
     except OSError as e:
         print(e)
     except KeyboardInterrupt:
-        socket.close()
+        s.close()
 
 
 
