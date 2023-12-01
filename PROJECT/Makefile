@@ -1,6 +1,6 @@
 all: 
 server: 
-	python3 server.py 12344 localhost
+	python3 server.py localhost 12344
 		
 client:
 	python3 client.py localhost 12344
