@@ -3,8 +3,14 @@ import socket
 import select
 import sys
 import shared as sh
+import threading
+
 #JUST TO GET THIS TO WORK I AM ADDING A PLACEHOLDER FOR PROTO
 proto = ''
+def reader_thread(sock):
+    while True:
+        nick, message, proto = sh.read_message(sock)
+        print(f"{nick} said {message}")
 
 def main():
     if len(sys.argv) != 3:
@@ -32,6 +38,7 @@ def main():
                 nickname = input("Enter your nickname: ").strip()
                 if nickname:
                     #send_message(sock, f"NICK:{nickname}")
+                    proto = 'verify' 
                     sh.send_message(sock, nickname, None, proto)
                     serverName, response, proto = sh.read_message(sock)
                     if response == "READY":
@@ -42,6 +49,11 @@ def main():
                     else:
                         print("Error: Unexpected response from server!")
                         continue
+            read_Thread = threading.Thread(target=reader_thread, args=[sock])
+            read_Thread.start()
+            while True:
+                myMessage = input()
+                sh.send_message(sock, myMessage, nickname, "broadcast")
 
         except KeyboardInterrupt:
             sh.send_message(sock, "BYE", nickname, proto)
