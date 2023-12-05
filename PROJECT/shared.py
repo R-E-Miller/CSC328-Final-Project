@@ -19,9 +19,15 @@ def send_message(connection, msg, nick, proto):
 def read_message(connection):
     #TODO: THIS HAS TO CHANGE TO ALLOW LARGER MESSAGES 
     length = true_read(connection, 2)
+    print(length)
+    if length == b'':
+        print("I READ NOTHING")
+        return (None, None, None)
     length = int.from_bytes(length, 'big')
-     
     receivedMsg = true_read(connection, length)
+    if receivedMsg is None:
+        print("NONE happened")
+        return (None, None, None)
     receivedMsg = receivedMsg.decode()
     receivedMsg = json.loads(receivedMsg)
     print(f'received: {receivedMsg}')

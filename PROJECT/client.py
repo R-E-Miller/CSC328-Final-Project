@@ -9,8 +9,10 @@ import threading
 proto = ''
 def reader_thread(sock):
     while True:
-        nick, message, proto = sh.read_message(sock)
-        print(f"{nick} said {message}")
+        myConnection = select.select([sock], [], [], 0)
+        if myConnection:
+            nick, message, proto = sh.read_message(sock)
+            print(f"{nick} said {message}")
 
 def main():
     if len(sys.argv) != 3:
@@ -56,7 +58,10 @@ def main():
                 sh.send_message(sock, myMessage, nickname, "broadcast")
 
         except KeyboardInterrupt:
+            proto = "goodbye"
             sh.send_message(sock, "BYE", nickname, proto)
+            read_Thread.join()
+            sock.close()
             print("BYE")
         except Exception as e:
             print(f"An error occurred: {e}")

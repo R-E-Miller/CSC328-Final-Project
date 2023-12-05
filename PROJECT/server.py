@@ -82,6 +82,19 @@ def main():
                                 case "broadcast":
                                     print("Broadcasting")
                                     broadcast(nick, message, proto, connectionList)
+                                case "goodbye":
+                                    print(f"{nick} is disconnecting")
+                                    myConnectionsSetup.remove(readySock)
+                                    connectionList.remove(readySock)
+                                    nickname.remove(nick)
+                                    readySock.close()
+                                case None:
+                                    myConnectionsSetup.remove(readySock)
+                                    connectionList.remove(readySock)
+                                    #NOTE: we need to make a dictionary in case something like this ever happens, map connections to the name
+                                    #nickname.remove(nick)
+                                    readySock.close()
+
 
             
     except OSError as e:
