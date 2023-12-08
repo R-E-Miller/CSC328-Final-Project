@@ -7,11 +7,16 @@ import threading
 
 #JUST TO GET THIS TO WORK I AM ADDING A PLACEHOLDER FOR PROTO
 proto = ''
+running = True
+
 def reader_thread(sock):
-    while True:
+    global running
+    while running:
         myConnection = select.select([sock], [], [], 0)
         if myConnection:
             nick, message, proto = sh.read_message(sock)
+            if message == "Connection closed":
+                break
             print(f"{nick} said {message}")
 
 def main():
@@ -58,11 +63,12 @@ def main():
                 sh.send_message(sock, myMessage, nickname, "broadcast")
 
         except KeyboardInterrupt:
+            running = False
             proto = "goodbye"
             sh.send_message(sock, "BYE", nickname, proto)
             read_Thread.join()
             sock.close()
-            print("BYE")
+            print("Disconnected from server.")
         except Exception as e:
             print(f"An error occurred: {e}")
         finally:

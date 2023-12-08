@@ -17,27 +17,21 @@ def send_message(connection, msg, nick, proto):
     connection.sendall(myMsg)
 
 def read_message(connection):
-    #TODO: THIS HAS TO CHANGE TO ALLOW LARGER MESSAGES 
+    #TODO Allow for longer messages.
     length = true_read(connection, 2)
-    print(length)
-    if length == b'':
-        print("I READ NOTHING")
-        return (None, None, None)
+    if not length:  # Check if length is an empty byte string
+        return (None, "Connection closed", None)
     length = int.from_bytes(length, 'big')
     receivedMsg = true_read(connection, length)
-    if receivedMsg is None:
-        print("NONE happened")
-        return (None, None, None)
+    if not receivedMsg:  # Check if receivedMsg is an empty byte string
+        return (None, "Connection closed", None)
     receivedMsg = receivedMsg.decode()
     receivedMsg = json.loads(receivedMsg)
-    print(f'received: {receivedMsg}')
     msg = receivedMsg['msg']
     nick = receivedMsg['nick']
     proto = receivedMsg['proto']
-
-    #msg = receivedMsg['msg']
-    #nick = receivedMsg['nick']
     return (nick, msg, proto)
+
 
 def true_read(connection, numToRead):
     bytesRead = b''
