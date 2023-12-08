@@ -5,6 +5,7 @@ import sys
 import json
 import shared as sh
 import time
+from datetime import datetime
 
 def broadcast(nick, message, proto, connectionList):
     print(f"{nick} said {message}")
@@ -23,9 +24,13 @@ def check_nick(s, storedname):
             continue
         message = "READY"
         sh.send_message(s, message, name,proto)
+
     # check nickname if nickname is taken 
     #reply back with either approved name or already taken
     #
+def log_mess(nick, message, proto, file_log):
+    print(f"{nick}: {message}: {datetime.now()}", file = file_log, flush = True )
+
 
 def send_hello(s):
     world = "HELLO"
@@ -42,6 +47,9 @@ def main():
         print("Port number not available")
         sys.exit(-1)
     try:
+        file_log = open("server_log.txt", 'a')
+        print("file opened", file = file_log, flush = True)
+        print(f"trial {datetime.now()}", file = file_log, flush = True )
         print("working")
         with socket.socket() as s:
             #s.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -50,6 +58,7 @@ def main():
             print("\n Server listening")
             myConnectionsSetup = [s]
             connectionList = []
+            connectioninfo = {}
 
             while True:
                 myConnections, _,_ = select.select(myConnectionsSetup, [], [], 0)
@@ -64,6 +73,7 @@ def main():
                         if readySock == s:
                             connection, addr = s.accept()
                             print(f"Got connection from {addr}")
+                            connectioninfo[connection] = addr
                             connectionList.append(connection)
                             myConnectionsSetup.append(connection)
                             print(len(connectionList))
@@ -77,11 +87,13 @@ def main():
                                     if message not in nickname:
                                         sh.send_message(readySock, "READY", myNick, 'verify')
                                         nickname.append(message)
+                                        print(f"{datetime.now()}: {connectioninfo[connection][0]}: {message} ", file = file_log, flush = True)
                                     else: 
                                         sh.send_message(readySock, "RETRY", myNick, 'verify')
                                 case "broadcast":
                                     print("Broadcasting")
                                     broadcast(nick, message, proto, connectionList)
+                                    log_mess(nick, message, proto, file_log)
                                 case "goodbye":
                                     print(f"{nick} is disconnecting")
                                     myConnectionsSetup.remove(readySock)
