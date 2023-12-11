@@ -9,7 +9,7 @@ import time
 from datetime import datetime
 
 def broadcast(nick, message, proto, connectionList):
-    print(f"{nick} said {message}")
+    print(f"{nick} : {message}")
     for connection in connectionList:
         sh.send_message(connection, message, nick, proto)
 
@@ -21,6 +21,33 @@ def send_hello(s):
     name = "SERVER"
     proto = 'connect'
     sh.send_message(s,world, name, proto)
+
+def proto_handle(nick, message, proto, connectionList, readySock, nickname, file_log, connectioninfo, connection, myNick, myConnectionsSetup):
+    match proto:
+        case "verify":
+            if message not in nickname:
+                sh.send_message(readySock, "READY", myNick, 'verify')
+                nickname.append(message)
+                print(f"{datetime.now()}: {connectioninfo[connection][0]}: {message} ", file = file_log, flush = True)
+            else: 
+                sh.send_message(readySock, "RETRY", myNick, 'verify')
+        case "broadcast":
+            print("Broadcasting")
+            broadcast(nick, message, proto, connectionList)
+            log_mess(nick, message, proto, file_log)
+        case "goodbye":
+            disc = f"{nick} disconnected"
+            broadcast(myNick, disc, proto, connectionList)
+            myConnectionsSetup.remove(readySock)
+            connectionList.remove(readySock)
+            nickname.remove(nick)
+            readySock.close()
+        case None:
+            myConnectionsSetup.remove(readySock)
+            connectionList.remove(readySock)
+            #NOTE: we need to make a dictionary in case something like this ever happens, map connections to the name
+            #nickname.remove(nick)
+            readySock.close()
 
 def main():
     nickname = ['SERVER']
@@ -66,30 +93,31 @@ def main():
                         if readySock != s:
                             print("READING FROM CLIENT")
                             nick, message, proto = sh.read_message(readySock)
-                            match proto:
-                                case "verify":
-                                    if message not in nickname:
-                                        sh.send_message(readySock, "READY", myNick, 'verify')
-                                        nickname.append(message)
-                                        print(f"{datetime.now()}: {connectioninfo[connection][0]}: {message} ", file = file_log, flush = True)
-                                    else: 
-                                        sh.send_message(readySock, "RETRY", myNick, 'verify')
-                                case "broadcast":
-                                    print("Broadcasting")
-                                    broadcast(nick, message, proto, connectionList)
-                                    log_mess(nick, message, proto, file_log)
-                                case "goodbye":
-                                    print(f"{nick} is disconnecting")
-                                    myConnectionsSetup.remove(readySock)
-                                    connectionList.remove(readySock)
-                                    nickname.remove(nick)
-                                    readySock.close()
-                                case None:
-                                    myConnectionsSetup.remove(readySock)
-                                    connectionList.remove(readySock)
-                                    #NOTE: we need to make a dictionary in case something like this ever happens, map connections to the name
+                            proto_handle(nick, message, proto, connectionList, readySock, nickname, file_log, connectioninfo, connection, myNick, myConnectionsSetup)
+                            #match proto:
+                            #    case "verify":
+                            #        if message not in nickname:
+                            #            sh.send_message(readySock, "READY", myNick, 'verify')
+                            #            nickname.append(message)
+                            #            print(f"{datetime.now()}: {connectioninfo[connection][0]}: {message} ", file = file_log, flush = True)
+                            #        else: 
+                            #            sh.send_message(readySock, "RETRY", myNick, 'verify')
+                            #    case "broadcast":
+                            #        print("Broadcasting")
+                            #        broadcast(nick, message, proto, connectionList)
+                            #        log_mess(nick, message, proto, file_log)
+                            #    case "goodbye":
+                            #        print(f"{nick} is disconnecting")
+                            #        myConnectionsSetup.remove(readySock)
+                            #        connectionList.remove(readySock)
+                            #        nickname.remove(nick)
+                            #        readySock.close()
+                            #    case None:
+                            #        myConnectionsSetup.remove(readySock)
+                            #        connectionList.remove(readySock)
+                            #        #NOTE: we need to make a dictionary in case something like this ever happens, map connections to the name
                                     #nickname.remove(nick)
-                                    readySock.close()
+                            #        readySock.close()
             
     except OSError as e:
         print(e)
