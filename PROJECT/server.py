@@ -12,22 +12,6 @@ def broadcast(nick, message, proto, connectionList):
     for connection in connectionList:
         sh.send_message(connection, message, nick, proto)
 
-def check_nick(s, storedname):
-    #read nickname from the client
-    bannedname = ["SERVER"]
-    message = ""
-    while message != "READY":
-        nic,msg,proto = sh.read_message(s)
-        if msg in storedname or msg in bannedname: 
-            message = "RETRY"
-            sh.send_message(s, message, name,proto)
-            continue
-        message = "READY"
-        sh.send_message(s, message, name,proto)
-
-    # check nickname if nickname is taken 
-    #reply back with either approved name or already taken
-    #
 def log_mess(nick, message, proto, file_log):
     print(f"{nick}: {message}: {datetime.now()}", file = file_log, flush = True )
 
@@ -112,6 +96,10 @@ def main():
     except OSError as e:
         print(e)
     except KeyboardInterrupt:
+        ser_end = "Server Shutting down in 5 seconds"
+        proto = "broadcast"
+        broadcast(myNick, ser_end, proto, connectionList)
+        time.sleep(5)
         s.close()
 
 if __name__ == "__main__":
