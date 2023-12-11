@@ -15,11 +15,10 @@ def broadcast(nick, message, proto, connectionList):
 def log_mess(nick, message, proto, file_log):
     print(f"{nick}: {message}: {datetime.now()}", file = file_log, flush = True )
 
-
 def send_hello(s):
     world = "HELLO"
     name = "SERVER"
-    proto = ''
+    proto = 'connect'
     sh.send_message(s,world, name, proto)
 
 def main():
@@ -90,14 +89,12 @@ def main():
                                     #NOTE: we need to make a dictionary in case something like this ever happens, map connections to the name
                                     #nickname.remove(nick)
                                     readySock.close()
-
-
             
     except OSError as e:
         print(e)
     except KeyboardInterrupt:
         ser_end = "Server Shutting down in 5 seconds"
-        proto = "broadcast"
+        proto = "shutdown"
         broadcast(myNick, ser_end, proto, connectionList)
         time.sleep(5)
         s.close()

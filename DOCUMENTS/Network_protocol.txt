@@ -1,0 +1,18 @@
+Network Socket Specifications:
+  The program will utilize json packets in order to send and receive information in a concise manner.
+  A packet will have the two following parts:
+    - a 2 byte length, specifying the length of the following JSON packet. This is done to ensure that the entire packet is read.
+    - a JSON packet. It has the following three fields:
+      - 'msg' - The incoming message if there is one. Used to communicate in certain points that will be described in the chat protocol.
+      - 'nick' - The nickname of the person who sent the message. Set to None upon connection, and will change upon approval. server has reserved nickname SERVER
+      - 'proto' - The protocol that will be followed. Used to communicate where each connection is sending its messaage. The accepted protocols will be described below.
+        - verify - This protocol is used by the client to tell the server that it is in the verification step of submitting it's nickname.
+          The msg at this stage is the nickname that the client would like to use. 
+        - broadcast - This protocol is used by the client to tell the server that it would like to broadcast it's msg field to every other connected client.
+          The server will then send the exact same packet to every other connected client. If a client receives broadcast as a proto, it will simply print the nick and msg fields.
+        - goodbye - This protocol is used by the client to tell the server that it is about to disconnect. The server will then handle resource cleanup 
+          (nickname removal, removal from socket lists) and close the socket. 
+        - shutdown - This protocol is used by the server to tell connected clients that it is about to shut down. The msg field will 
+          contain a message saying how long until shutdown each client has.
+        - 
+Chat Protocol Specifications:
