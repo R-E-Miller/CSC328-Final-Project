@@ -1,8 +1,9 @@
+#!/usr/bin/env python3
 # R-E Miller (IT), Matthew Hill (CS), Elliot Swan (CS)
 import socket 
 import select
 import sys
-import json
+#import json
 import shared as sh
 import time
 from datetime import datetime
