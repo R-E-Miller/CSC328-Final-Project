@@ -8,12 +8,8 @@ def send_message(connection, msg, nick, proto):
     myData = {'msg': msg, 'nick': nick, 'proto':proto}
     myMsg = json.dumps(myData) 
     myMsg = myMsg.encode()
-    #myMsg = myMsg.decode()
-    #myMsg = json.loads(myMsg)
-    #print(myMsg['msg'])
     length= len(myMsg).to_bytes(2, 'big')
     myMsg = length+myMsg
-    print(f'Sending {myMsg}')
     connection.sendall(myMsg)
 
 def read_message(connection):
