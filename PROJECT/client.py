@@ -60,7 +60,8 @@ def main():
             read_Thread.start()
             while True:
                 myMessage = input()
-                sh.send_message(sock, myMessage, nickname, "broadcast")
+                if myMessage.strip():  # Check if message is not just whitespace
+                    sh.send_message(sock, myMessage, nickname, "broadcast")
 
         except KeyboardInterrupt:
             running = False
