@@ -167,6 +167,8 @@ def main():
         proto = "shutdown"
         broadcast(myNick, ser_end, proto, connectionList)
         time.sleep(5)
+        for connection in connectionList:
+            connection.close()
         s.close()
 
 if __name__ == "__main__":
