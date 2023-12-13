@@ -58,6 +58,8 @@ Our project is structured around specific tasks assigned to each team member. We
   _Time taken: 3 hours._
 - **Sending/Receiving JSON Packets**: Establishing protocols for message transmission and reception.  
   _Time taken: 2 hours._
+  - **Debugging**: Fixing any bugs or issues that came up.  
+  _Time taken: 5 hours._
 
 ## Protocol
 ### Network Socket Specifications
