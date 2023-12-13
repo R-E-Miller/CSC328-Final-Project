@@ -5,7 +5,6 @@ import sys
 import shared as sh
 import threading
 
-#JUST TO GET THIS TO WORK I AM ADDING A PLACEHOLDER FOR PROTO
 proto = ''
 running = True
 
