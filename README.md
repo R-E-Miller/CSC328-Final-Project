@@ -1,4 +1,4 @@
-#################################################################################
+################################################################################
 # Author: R-E Miller, Elliot Swan, Matthew Hill                                 #
 # Major: IT, CS, CS (respectively)                                              #
 # Creation Date: November 23, 2023                                              #
@@ -14,7 +14,7 @@
 #           send their messages to everyone connected. The server also logs and #
 #           stores all of the information that is recieved as well as when they #
 #           logged in and their ip.                                             #
-#################################################################################
+################################################################################
 
 
 How to build and run the program
@@ -30,7 +30,8 @@ Purpose of the files
     The cleint.py is the code to create the client that is able to connect to the server and handles information from the server to the client.
     The Makefile is the script to create a server and client easily and is prebound to localhost for both as well as using socket 12345.
 
-Responsibility matrix
+RTM
+    
 
 Tasks involved
 Our project involves a plan in which a specific task i assigned to each team member. We have
