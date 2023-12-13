@@ -34,7 +34,9 @@ running = True
 # Parameters:  sock - the socket to read messages from - Input                #
 # Return Value: None                                                          #
 ###############################################################################
+
 def reader_thread(sock):
+
     global running
     while running:
         myConnection = select.select([sock], [], [], 0)
@@ -53,7 +55,9 @@ def reader_thread(sock):
 # Parameters:  None                                                           #
 # Return Value: None                                                          #
 ###############################################################################
+
 def main():
+
     if len(sys.argv) != 3:
         print("Usage: python client.py <host> <port>")
         sys.exit()
@@ -90,6 +94,7 @@ def main():
                     else:
                         print("Error: Unexpected response from server!")
                         continue
+                        
             read_Thread = threading.Thread(target=reader_thread, args=[sock])
             read_Thread.start()
             
