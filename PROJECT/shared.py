@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# Authors: Elliot Swan(CS), R.E. Miller(IT), Matthew Hill(CS)
+# Authors: Elliot Swan(CS), R-E Miller(IT), Matthew Hill(CS)
 # Major: CS and IT
 # Creation Date: November 23, 2023
 # Due Date: November 14, 2023
