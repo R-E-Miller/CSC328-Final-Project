@@ -125,7 +125,6 @@ def main():
         file_log = open("server_log.txt", 'a')
         print("file opened", file = file_log, flush = True)
         print(f"trial {datetime.now()}", file = file_log, flush = True )
-        print("working")
         with socket.socket() as s:
             s.bind((host, port))
             s.listen(10)
@@ -147,10 +146,10 @@ def main():
                             connectioninfo[connection] = addr
                             connectionList.append(connection)
                             myConnectionsSetup.append(connection)
-                            print(len(connectionList))
+                            #print(len(connectionList))
                             send_hello(connection)
                         if readySock != s:
-                            print("READING FROM CLIENT")
+                            #print("READING FROM CLIENT")
                             nick, message, proto = sh.read_message(readySock)
                             proto_handle(nick, message, proto, connectionList, readySock, nickname, file_log, connectioninfo, connection, myNick, myConnectionsSetup)
 
