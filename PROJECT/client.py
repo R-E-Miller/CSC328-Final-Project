@@ -70,12 +70,12 @@ def main():
             print("Connected to the server.")
 
             # Wait for HELLO message from the server
-            print("going to try to read from server")
+            print("Attemping to read from server...")
             serverName, hello_message, proto = sh.read_message(sock)
             if "HELLO" in hello_message:
                 print(hello_message)
             else:
-                print("Did not receive HELLO..")
+                print("Did not receive HELLO...")
                 return
 
             # Handle nickname setup loop
