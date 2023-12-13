@@ -1,4 +1,22 @@
 #!/usr/bin/env python3
+
+#################################################################################
+# Author: R-E Miller, Elliot Swan, Matthew Hill                                 #
+# Major: IT, CS, CS (respectively)                                              #
+# Creation Date: November 23, 2023                                              #
+# Due Date: December 14, 2023 @ 10AM                                            #
+# Course: CSC328: Network & Secure Programming                                  #
+# Professor Name: Dr. Dylan Schwesinger                                         #
+# Assignment: Final Project                                                     #
+# Filename: client.py                                                           #
+# Purpose: This code functions as the client component in a network chat        # 
+#          application. It manages the connection to the chat server, processes # 
+#          incoming and outgoing messages, and handles user interactions for    # 
+#          nickname selection and verification. The client ensures a clean      # 
+#          shutdown process, both during normal operation and when intercepting # 
+#          keyboard interrupts for termination.                                 #
+#################################################################################
+
 import socket
 import select
 import sys
@@ -8,6 +26,14 @@ import threading
 proto = ''
 running = True
 
+###############################################################################
+# Function name: reader_thread                                                #
+# Description: Continuously reads messages from the server and prints them.   #
+#              Stops when the global running flag is set to False or upon     #
+#              receiving a "Connection closed" message.                       #
+# Parameters:  sock - the socket to read messages from - Input                #
+# Return Value: None                                                          #
+###############################################################################
 def reader_thread(sock):
     global running
     while running:
@@ -18,6 +44,15 @@ def reader_thread(sock):
                 break
             print(f"{nick} said {message}")
 
+###############################################################################
+# Function name: main                                                         #
+# Description: Main function to run the client. Connects to the server,       #
+#              handles the initial HELLO message, nickname setup, and         #
+#              message sending. Catches keyboard interrupt to close the       #
+#              connection gracefully.                                         #
+# Parameters:  None                                                           #
+# Return Value: None                                                          #
+###############################################################################
 def main():
     if len(sys.argv) != 3:
         print("Usage: python client.py <host> <port>")
@@ -57,6 +92,7 @@ def main():
                         continue
             read_Thread = threading.Thread(target=reader_thread, args=[sock])
             read_Thread.start()
+            
             while True:
                 myMessage = input()
                 if myMessage.strip():  # Check if message is not just whitespace
