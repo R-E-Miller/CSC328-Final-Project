@@ -30,6 +30,57 @@ To start, get the server running. This can be achieved by doing `make server`. T
 ## Tasks Involved
 
 ## Protocol
+### Network Socket Specifications
+The program utilizes JSON packets for concise and structured data exchange. A packet consists of:
+- A **2-byte length** in big endian, specifying the length of the following JSON packet.
+- A **JSON packet** with three fields:
+  - `msg`: Incoming message or command.
+  - `nick`: Nickname of the sender; `None` upon connection, changes upon approval. Server reserved nickname is `SERVER`.
+  - `proto`: Protocol type indicating the action or stage.
+
+#### Reading
+- The first two bytes of the packet are read and converted from big endian if necessary.
+- The indicated number of bytes is then read to obtain a JSON object.
+- The JSON object is decoded for use as a dictionary to access `msg`, `nick`, and `proto` fields.
+
+#### Sending
+- The JSON packet is created with `msg`, `nick`, and `proto` fields filled.
+- The packet's byte length is determined, converted to big endian, and prefixed to the JSON object before sending.
+
+### Chat Protocol Specifications (Client Side)
+1. **Initiate Connection**: Open a socket using command line information and connect to the server.
+2. **Receive Greeting**: Upon connection, receive a packet with `msg = 'HELLO'` and `proto = 'connect'`.
+3. **Nickname Verification Loop**:
+   - Prompt user for a unique nickname to join the chat.
+   - Send a packet with `proto = 'verify'` and the chosen nickname in `msg`.
+   - If accepted, receive `msg = 'READY'`; if not, receive `msg = 'RETRY'`.
+4. **Chat Session**:
+   - Interact with the chat room by sending messages (prompted from the user) with `proto = 'broadcast'`.
+   - Receive messages with `proto = 'broadcast'` or `proto = 'shutdown'` for server announcements.
+5. **Client Exit**: Send `msg = 'BYE'` and `proto = 'goodbye'` to signal intention to disconnect.
+
+### Server Protocol Specifications
+1. **Setup**: Bind to command line specified port and start listening.
+2. **Connection Handling**:
+   - On new connection, accept, send greeting, and monitor for activity.
+   - Use `select` library to manage asynchronous I/O.
+3. **Protocol Handling**:
+   - `verify`: Check nickname uniqueness; respond with `READY` or `RETRY`.
+   - `broadcast`: Relay message to all connected clients.
+   - `goodbye`: Announce client disconnection and remove from active list.
+   - Handle unexpected disconnections and clean up resources.
+4. **Server Shutdown**:
+   - Broadcast `Server Shutting down in 5 seconds` with `proto = 'shutdown'`.
+
+### Current Status
+- Both server and client operate in terminal interface.
+- Supports asynchronous client connections, unique nicknames, and broadcasting chat messages.
+- Graceful and non-graceful client shutdowns are managed.
+- Known issues:
+  - Client input can be disrupted by incoming messages, which could be improved with a TUI implementation.
+  - Server shutdown allows for client preparation.
+
+
 
 ## Assumptions
 - **Network Environment:** Assumes a stable network connection for uninterrupted client-server communication.
