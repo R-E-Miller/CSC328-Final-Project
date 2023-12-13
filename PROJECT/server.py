@@ -110,6 +110,8 @@ def proto_handle(nick, message, proto, connectionList, readySock, nickname, file
 #                IP address as well as all of the messages sent in the server with time logs.
 #                The server gracefully closes and also lets other clients know when someone leaves.
 # Parameters: none
+# Much of the basics of setting of a socket was described from the python library for sockets
+# This was also presented in class
 ###############################################################################################
 def main():
     nickname = ['SERVER']
