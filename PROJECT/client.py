@@ -62,6 +62,7 @@ def main():
         print("Usage: python client.py <host> <port>")
         sys.exit()
 
+    # Sets host + port to commandline values from user
     host, port = sys.argv[1], int(sys.argv[2])
 
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
@@ -82,7 +83,6 @@ def main():
             while True:
                 nickname = input("Enter your nickname: ").strip()
                 if nickname:
-                    #send_message(sock, f"NICK:{nickname}")
                     proto = 'verify' 
                     sh.send_message(sock, nickname, None, proto)
                     serverName, response, proto = sh.read_message(sock)
