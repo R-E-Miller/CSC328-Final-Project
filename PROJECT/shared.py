@@ -1,4 +1,20 @@
 #!/usr/bin/env python3
+
+#################################################################################
+# Author: R-E Miller, Elliot Swan, Matthew Hill                                 #
+# Major: IT, CS, CS (respectively)                                              #
+# Creation Date: November 23, 2023                                              #
+# Due Date: December 14, 2023 @ 10AM                                            #
+# Course: CSC328 Network & Secure Programming                                   #
+# Professor Name: Dr. Dylan Schwesinger                                         #
+# Assignment: Final Project                                                     #
+# Filename: shared.py                                                           #
+# Purpose: This script provides the shared functionalities between the client   #
+#          and the server for a network chat application. It includes           #
+#          functions for sending and reading messages in a JSON formatted       #
+#          protocol, ensuring communication consistency across the network.     #
+#################################################################################
+
 import socket
 import json
 
