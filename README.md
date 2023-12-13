@@ -21,11 +21,12 @@ To start, get the server running. This can be achieved by doing `make server`. T
 - `Makefile`: The script to create a server and client easily and is prebound to localhost for both as well as using socket 12345.
 
 ## Responsibility Matrix
+
 | Team Member | Responsibilities |
 |-------------|------------------|
-| R-E Miller | - Team leader. Handled initial client/server connection code. Wrote majority of the Client code and assisted in Server code development for bug fixes and adding additional features. Educated teammates on setting up and managing a GitHub repository. Researched user interface technologies like Textualize and Curses. |
-| Elliot Swan | - Developed all Shared Libraries code. Addressed bugs in Client and Server code. Managed JSON related functionalities. Assisted in transitioning from C to Python. Researched concurrency handling methods. |
-| Matthew Hill | - Authored majority of Server code. Managed GitHub repository to prevent merge conflicts. Created significant portion of logistical documentation. Developed server logging system. |
+| R-E Miller  | - Team leader.<br> - Handled initial client/server connection code.<br> - Wrote majority of the Client code and assisted in Server code development for bug fixes and adding additional features.<br> - Educated teammates on setting up and managing a GitHub repository.<br> - Researched user interface technologies like Textualize and Curses. |
+| Elliot Swan | - Developed all Shared Libraries code.<br> - Addressed bugs in Client and Server code.<br> - Managed JSON related functionalities.<br> - Assisted in transitioning from C to Python.<br> - Researched concurrency handling methods. |
+| Matthew Hill| - Authored majority of Server code.<br> - Managed GitHub repository to prevent merge conflicts.<br> - Created significant portion of logistical documentation.<br> - Developed server logging system. |
 
 ## Tasks Involved
 
@@ -37,16 +38,13 @@ The program utilizes JSON packets for concise and structured data exchange. A pa
   - `msg`: Incoming message or command.
   - `nick`: Nickname of the sender; `None` upon connection, changes upon approval. Server reserved nickname is `SERVER`.
   - `proto`: Protocol type indicating the action or stage.
-
 #### Reading
 - The first two bytes of the packet are read and converted from big endian if necessary.
 - The indicated number of bytes is then read to obtain a JSON object.
 - The JSON object is decoded for use as a dictionary to access `msg`, `nick`, and `proto` fields.
-
 #### Sending
 - The JSON packet is created with `msg`, `nick`, and `proto` fields filled.
 - The packet's byte length is determined, converted to big endian, and prefixed to the JSON object before sending.
-
 ### Chat Protocol Specifications (Client Side)
 1. **Initiate Connection**: Open a socket using command line information and connect to the server.
 2. **Receive Greeting**: Upon connection, receive a packet with `msg = 'HELLO'` and `proto = 'connect'`.
@@ -58,7 +56,6 @@ The program utilizes JSON packets for concise and structured data exchange. A pa
    - Interact with the chat room by sending messages (prompted from the user) with `proto = 'broadcast'`.
    - Receive messages with `proto = 'broadcast'` or `proto = 'shutdown'` for server announcements.
 5. **Client Exit**: Send `msg = 'BYE'` and `proto = 'goodbye'` to signal intention to disconnect.
-
 ### Server Protocol Specifications
 1. **Setup**: Bind to command line specified port and start listening.
 2. **Connection Handling**:
@@ -71,7 +68,6 @@ The program utilizes JSON packets for concise and structured data exchange. A pa
    - Handle unexpected disconnections and clean up resources.
 4. **Server Shutdown**:
    - Broadcast `Server Shutting down in 5 seconds` with `proto = 'shutdown'`.
-
 ### Current Status
 - Both server and client operate in terminal interface.
 - Supports asynchronous client connections, unique nicknames, and broadcasting chat messages.
@@ -79,8 +75,6 @@ The program utilizes JSON packets for concise and structured data exchange. A pa
 - Known issues:
   - Client input can be disrupted by incoming messages, which could be improved with a TUI implementation.
   - Server shutdown allows for client preparation.
-
-
 
 ## Assumptions
 - **Network Environment:** Assumes a stable network connection for uninterrupted client-server communication.
@@ -94,7 +88,6 @@ The program utilizes JSON packets for concise and structured data exchange. A pa
 - **Message Display Integrity:** Assumes clients wait to receive a message before sending to prevent overlap.
 - **Makefile Usage:** Assumes user familiarity with Makefiles and running `make clean` before compiling.
 - **Open Network Port:** Assumes the specified server port is open and not blocked by network security measures.
-
 
 ## Discussion on Development Process
 The project went pretty well. There was a struggle after the server was first started, particularly with handling multiple clients. We initially wanted to use threads but switched to select to avoid race conditions. Once we figured out how to use select, the rest of the server implementation went well. The client-side was straightforward as we used threads to handle reading. The protocol for different cases, whether broadcasting to everyone, selecting a unique username, or leaving, made the project function well overall. Elliot's shared library was integral as it allowed us to easily read and write messages by calling his functions that created and decoded JSON packets. The main challenge was learning how to work with JSON packets, but we overcame this quickly.
