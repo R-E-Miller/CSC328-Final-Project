@@ -21,12 +21,29 @@ To start, get the server running. This can be achieved by doing `make server`. T
 - `Makefile`: The script to create a server and client easily and is prebound to localhost for both as well as using socket 12345.
 
 ## Responsibility Matrix
+| Team Member | Responsibilities |
+|-------------|------------------|
+| R-E Miller | - Team leader. Handled initial client/server connection code. Wrote majority of the Client code and assisted in Server code development for bug fixes and adding additional features. Educated teammates on setting up and managing a GitHub repository. Researched user interface technologies like Textualize and Curses. |
+| Elliot Swan | - Developed all Shared Libraries code. Addressed bugs in Client and Server code. Managed JSON related functionalities. Assisted in transitioning from C to Python. Researched concurrency handling methods. |
+| Matthew Hill | - Authored majority of Server code. Managed GitHub repository to prevent merge conflicts. Created significant portion of logistical documentation. Developed server logging system. |
 
 ## Tasks Involved
 
 ## Protocol
 
 ## Assumptions
+- **Network Environment:** Assumes a stable network connection for uninterrupted client-server communication.
+- **Unique Nicknames:** Assumes each client will choose a unique nickname for identification.
+- **Graceful Shutdown:** Assumes the server can be terminated gracefully with a keyboard interrupt, signaling shutdown to all clients.
+- **JSON-based Communication:** Assumes all messages are in JSON format for structured data exchange.
+- **Command-Line Arguments:** Assumes user familiarity with running Python scripts and command-line arguments.
+- **Single Chat Room:** Assumes a single chat room for all client communication without private messaging.
+- **Port Number Range:** Assumes server port number within the range of 10000 to 65535.
+- **Error Handling:** Assumes basic error handling for network errors and client disconnections are in place.
+- **Message Display Integrity:** Assumes clients wait to receive a message before sending to prevent overlap.
+- **Makefile Usage:** Assumes user familiarity with Makefiles and running `make clean` before compiling.
+- **Open Network Port:** Assumes the specified server port is open and not blocked by network security measures.
+
 
 ## Discussion on Development Process
 The project went pretty well. There was a struggle after the server was first started, particularly with handling multiple clients. We initially wanted to use threads but switched to select to avoid race conditions. Once we figured out how to use select, the rest of the server implementation went well. The client-side was straightforward as we used threads to handle reading. The protocol for different cases, whether broadcasting to everyone, selecting a unique username, or leaving, made the project function well overall. Elliot's shared library was integral as it allowed us to easily read and write messages by calling his functions that created and decoded JSON packets. The main challenge was learning how to work with JSON packets, but we overcame this quickly.
