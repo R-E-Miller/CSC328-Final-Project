@@ -28,11 +28,9 @@ To start, get the server running. This can be achieved by doing `make server`. T
 | Elliot Swan | - Developed all Shared Libraries code.<br> - Addressed bugs in Client and Server code.<br> - Managed JSON related functionalities.<br> - Assisted in transitioning from C to Python.<br> - Researched concurrency handling methods. |
 | Matthew Hill| - Authored majority of Server code.<br> - Managed GitHub repository to prevent merge conflicts.<br> - Created significant portion of logistical documentation.<br> - Developed server logging system. |
 
-## Tasks Involved
-## Tasks Involved
 
+## Tasks Involved
 Our project is structured around specific tasks assigned to each team member. We have divided the project into key areas—Server, Client, and Library code—with each area having its own set of tasks and sub-tasks.
-
 ### Server Tasks (Matthew Hill)
 - **Creating the Server**: Setting up server infrastructure & ensuring it can handle multiple client connections.  
   _Estimated time: 2 days._
@@ -42,7 +40,6 @@ Our project is structured around specific tasks assigned to each team member. We
   _Estimated time: 6-8 hours._
 - **Graceful Shutdown**: Developing a mechanism for the server to shut down gracefully, including sending notifications to all connected clients.  
   _Estimated time: 2 hours._
-
 ### Client Tasks (R-E Miller)
 - **Connecting to Server**: Establishing a reliable connection to the server.  
   _Estimated time: 1 day._
@@ -52,7 +49,6 @@ Our project is structured around specific tasks assigned to each team member. We
   _Estimated time: 1 day._
 - **Disconnecting**: Implementing a smooth and user-friendly disconnection process.  
   _Estimated time: 4 hours._
-
 ### Library Code/Curses Integration (Elliot Swan)
 - **Encoding/Decoding JSON Packets**: Developing methods to encode and decode messages in JSON format for efficient communication.  
   _Estimated time: 1 day._
@@ -60,7 +56,6 @@ Our project is structured around specific tasks assigned to each team member. We
   _Estimated time: 1 day._
 - **UI Research and Design in Curses**: Designing and implementing the user interface using the curses library, ensuring a seamless user experience.  
   _Estimated time: 2 days._
-
 
 ## Protocol
 ### Network Socket Specifications
