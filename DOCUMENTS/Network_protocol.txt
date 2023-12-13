@@ -20,7 +20,13 @@ Network Socket Specifications:
 
         - shutdown - This protocol is used by the server to tell connected clients that it is about to shut down. The msg field will 
           contain a message saying how long until shutdown each client has. 
-
+  Reading:
+    The first two bytes of the packet will be read, and converted from big endian if necessary. Then, that number of bytes will be read to get a json object, which will then 
+    be decoded. This may then be used as a dictionary to access the msg, nick and proto fields.
+  Sending:
+    The JSON packet will first be created, with the fields msg, nick and proto all having data in their fields. The length of the JSON object will then be found and appended to the 
+    front of the object in big endian order, it will then be sent to the socket.
+  
 The overall chat protocol will be easier to understand from an implementation point of view by breaking it into two halves, client half and server half.
 Chat Protocol Specifications (client side):
   The client begins by opening a socket upon the information supplied in the command line. It will then connect to the server using the information from the command line.
@@ -71,3 +77,38 @@ Chat Protocol Specifications (client side):
       socket will be closed. The server may now continue with i/o.
       In the case that a packet is not read, and a terminated socket is received, there was an error sending from the client or the client shutdown unexpectedly. In this case,
       there should be a dictionary mapping connection to nickname. Remove the connection and nickname respectively, and close the socket. The server may now continue with i/o. 
+
+    server shutdown: 
+      In the case the server has to be shut down, it will broadcast a packet to every member with the msg "Server Shutting down in 5 seconds" and proto 'shutdown'. This will 
+      give the clients a chance to prepare for the shutdown.
+
+STATUS:
+The server and client both work in a terminal interface. 
+The server supports the following features 
+  - Clients may connect asynchronously
+  - Clients may pick unique nicknames 
+  - Clients may chat to each other by broadcasting their messages from the server.
+      - The server supports graceful and non-graceful client shutdowns. 
+The client suppports the following features:
+  - Connecting to the server
+  - Creating a unique nickname
+  - Chatting with other clients through a broadcast by the server
+    - An issue occurs when typing to other members if the client receives a message, It prints the message in the middle of the input, looking messy. 
+        - This could have been fixed by creating a TUI, but for the purposes of the project we did not have time to implement one. 
+    - The client can handle the shutdown of the server 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
