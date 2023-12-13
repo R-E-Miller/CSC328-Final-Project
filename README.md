@@ -40,6 +40,7 @@ Our project is structured around specific tasks assigned to each team member. We
   _Time taken: 12 hours._
 - **Graceful Shutdown**: Developing a mechanism for the server to shut down gracefully, including sending notifications to all connected clients.  
   _Time taken: 1/2 hour._
+  
 ### Client Tasks (R-E Miller)
 - **Connecting to Server**: Establishing a reliable connection to the server.  
   _Time taken: 4 hours._
@@ -51,6 +52,7 @@ Our project is structured around specific tasks assigned to each team member. We
   _Time taken: 2 hours._
 - **Debugging**: Fixing any bugs or issues that came up.  
   _Time taken: 3 hours._
+  
 ### Library Code/Curses Integration (Elliot Swan)
 - **Encoding/Decoding JSON Packets**: Developing methods to encode and decode messages in JSON format for efficient communication.  
   _Time taken: 3 hours._
@@ -116,9 +118,22 @@ The program utilizes JSON packets for concise and structured data exchange. A pa
 - **Makefile Usage:** Assumes user familiarity with Makefiles and running `make clean` before compiling.
 - **Open Network Port:** Assumes the specified server port is open and not blocked by network security measures.
 - **GitHub Repository:** The GitHub repository (found at https://github.com/R-E-Miller/CSC328-Final-Project) is assumed to be public so that the professor can view it as we make progress.
-
+- **Client Disconnection:** It is assumed that the client ALWAYS disconnects using "CTRL-C", and does not just "X" out of the window.
 
 ## Discussion on Development Process
 The project went pretty well. There was a struggle after the server was first started, particularly with handling multiple clients. We initially wanted to use threads but switched to select to avoid race conditions. Once we figured out how to use select, the rest of the server implementation went well. The client-side was straightforward as we used threads to handle reading. The protocol for different cases, whether broadcasting to everyone, selecting a unique username, or leaving, made the project function well overall. Elliot's shared library was integral as it allowed us to easily read and write messages by calling his functions that created and decoded JSON packets. The main challenge was learning how to work with JSON packets, but we overcame this quickly.
 
 ## Current Status
+The server and client both operate in a terminal interface.
+### Server Features
+- Allows asynchronous client connections.
+- Supports unique nickname selection for clients.
+- Facilitates client-to-client communication through message broadcasting.
+- Manages both graceful and non-graceful client shutdowns.
+### Client Features
+- Connects seamlessly to the server.
+- Allows clients to create and use unique nicknames.
+- Enables clients to chat with others through server broadcasting.
+#### Known Issues
+- **Input Disruption**: While typing messages, incoming messages from other clients can disrupt the display. This results in messages appearing in the middle of the user's input, which can look messy. A Text User Interface (TUI) could resolve this issue, but it was not implemented due to time constraints.
+- **Shutdown Handling**: The client is capable of handling notifications about server shutdown, ensuring a smooth user experience during server closure.
