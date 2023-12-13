@@ -21,19 +21,14 @@ To start, get the server running. This can be achieved by doing `make server`. T
 - `Makefile`: The script to create a server and client easily and is prebound to localhost for both as well as using socket 12345.
 
 ## Responsibility Matrix
-(Include your RTM here.)
 
 ## Tasks Involved
-(Include the detailed tasks and their actual completion times.)
 
 ## Protocol
-(Include the details of your developed protocol here, how the socket reads/writes work, any special messages, etc.)
 
 ## Assumptions
-(Include the list of assumptions made about running the application or how it works.)
 
 ## Discussion on Development Process
 The project went pretty well. There was a struggle after the server was first started, particularly with handling multiple clients. We initially wanted to use threads but switched to select to avoid race conditions. Once we figured out how to use select, the rest of the server implementation went well. The client-side was straightforward as we used threads to handle reading. The protocol for different cases, whether broadcasting to everyone, selecting a unique username, or leaving, made the project function well overall. Elliot's shared library was integral as it allowed us to easily read and write messages by calling his functions that created and decoded JSON packets. The main challenge was learning how to work with JSON packets, but we overcame this quickly.
 
 ## Current Status
-(Include the current status of the application in terms of specifications, and any known issues with the application.)
