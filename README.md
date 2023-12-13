@@ -20,7 +20,7 @@ To start, get the server running. This can be achieved by doing `make server`. T
 - `client.py`: The code to create the client that is able to connect to the server and handles information from the server to the client.
 - `Makefile`: The script to create a server and client easily and is prebound to localhost for both as well as using socket 12345.
 
-## Responsibility Matrix (RTM)
+## Responsibility Matrix Table
 
 | Team Member | Responsibilities |
 |-------------|------------------|
