@@ -11,16 +11,16 @@
 - **Filename:** Readme.md
 - **Purpose:** This file acts as the Readme for our project. The purpose of this assignment was to create a chat server that accepts multiple clients and they are able to converse with one another. They must all have unique nicknames and the server must send their messages to everyone connected. The server also logs and stores all of the information that is received as well as when they logged in and their IP.
 
-## How to Build and Run the Program
+## How to Build and Run the Client and Server
 To start, get the server running. This can be achieved by doing `make server`. This will create a server on the localhost and will allow connections. The next step is to then run `make client` which will execute the client program and connect to the server. Multiple connections can be made to the server (Maximum of 10). From there the connected clients must choose a unique nickname and then they are able to chat with one another. To leave the server simply hit `Ctrl+C`. To shutdown the server also hit `Ctrl+C`, but it has a 5-second wait time as it informs the connected clients that the server is shutting down.
 
-## Purpose of the Files
+## File & Folder Manifest
 - `shared.py`: The shared library used to send and receive messages that both the client and server use.
 - `server.py`: The code to create the server and handles multiple client connections as well as broadcasting messages.
 - `client.py`: The code to create the client that is able to connect to the server and handles information from the server to the client.
 - `Makefile`: The script to create a server and client easily and is prebound to localhost for both as well as using socket 12345.
 
-## Responsibility Matrix
+## Responsibility Matrix (RTM)
 
 | Team Member | Responsibilities |
 |-------------|------------------|
@@ -29,7 +29,7 @@ To start, get the server running. This can be achieved by doing `make server`. T
 | Matthew Hill| - Authored majority of Server code.<br> - Managed GitHub repository to prevent merge conflicts.<br> - Created significant portion of logistical documentation.<br> - Developed server logging system. |
 
 
-## Tasks Involved
+## Tasks Involved/Time Taken (Per Member)
 Our project is structured around specific tasks assigned to each team member. We have divided the project into key areas—Server, Client, and Library code—with each area having its own set of tasks and sub-tasks.
 ### Server Tasks (Matthew Hill)
 - **Creating the Server**: Setting up server infrastructure & ensuring it can handle multiple client connections.  
