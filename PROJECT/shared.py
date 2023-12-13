@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+<<<<<<< HEAD
 # Authors: Elliot Swan(CS), R.E. Miller(IT), Matthew Hill(CS)
 # Major: CS and IT
 # Creation Date: November 23, 2023
@@ -11,6 +12,24 @@
 # JSON packets described in the Network protocol. 
 # CITATION: The function true_read was provided to the class under the name really_read by Dr. Schwesinger in project 5's python solution
 #
+=======
+
+#################################################################################
+# Author: R-E Miller, Elliot Swan, Matthew Hill                                 #
+# Major: IT, CS, CS (respectively)                                              #
+# Creation Date: November 23, 2023                                              #
+# Due Date: December 14, 2023 @ 10AM                                            #
+# Course: CSC328 Network & Secure Programming                                   #
+# Professor Name: Dr. Dylan Schwesinger                                         #
+# Assignment: Final Project                                                     #
+# Filename: shared.py                                                           #
+# Purpose: This script provides the shared functionalities between the client   #
+#          and the server for a network chat application. It includes           #
+#          functions for sending and reading messages in a JSON formatted       #
+#          protocol, ensuring communication consistency across the network.     #
+#################################################################################
+
+>>>>>>> 7f8ca2d47d067996989f6ea2cb0519d567bd7e8a
 import socket
 import json
 
