@@ -1,30 +1,21 @@
-CSC328 Final Project Chat Server
-Authors:
-    Matthew Hill
-    R-E Miller
-    Elliot Swan
-Major:
-    Computer Science/Information Technology
-Creation Date:
-    November 23, 2023
-Due Date:
-    December 14, 2023
-Course:
-    CSC328
-Professor Name: 
-    Dr. Dylan Schwesinger
-Assignment:
-    Final
-FileNames:
-    server.py
-    client.py
-    shared.py
-    makefile
-Purpose:
-    The purpose of this assignment was to create a chat server that accepts multiple clients 
-    and they are able to converse with one another. They must all have unique nicknames
-    and the server must send their messages to everyone connected. The server also logs and stores
-    all of the information that is recieved as well as when they logged in and their ip.
+#################################################################################
+# Author: R-E Miller, Elliot Swan, Matthew Hill                                 #
+# Major: IT, CS, CS (respectively)                                              #
+# Creation Date: November 23, 2023                                              #
+# Due Date: December 14, 2023 @ 10AM                                            #
+# Course: CSC328: Network & Secure Programming                                  #
+# Professor Name: Dr. Dylan Schwesinger                                         #
+# Assignment: Final Project                                                     #
+# Filename: Readme.pd                                                           #
+# Purpose: This file acts as the Readme for our project.                        #
+#           The purpose of this assignment was to create a chat server that     #
+#           accepts multiple clients and they are able to converse with one     #
+#           another. They must all have unique nicknames and the server must    #
+#           send their messages to everyone connected. The server also logs and #
+#           stores all of the information that is recieved as well as when they #
+#           logged in and their ip.                                             #
+#################################################################################
+
 
 How to build and run the program
     To start, get the server running. This can be acheived by doing make server. This will create server on 
@@ -35,9 +26,9 @@ How to build and run the program
 
 Purpose of the files
     The shared.py file is the shared library used to send and recieve messages that both the client and server use.
-    server.py is the code to create the server and handles multiple client connections as well as broadcasting messages.
-    cleint.py is the code to create the client that is able to connect to the server and handles information from the server to the client.
-    makefile is the script to create a server and client easily and is prebound to localhost for both as well as using socket 12345.
+    The server.py is the code to create the server and handles multiple client connections as well as broadcasting messages.
+    The cleint.py is the code to create the client that is able to connect to the server and handles information from the server to the client.
+    The Makefile is the script to create a server and client easily and is prebound to localhost for both as well as using socket 12345.
 
 Responsibility matrix
 
