@@ -33,29 +33,29 @@ To start, get the server running. This can be achieved by doing `make server`. T
 Our project is structured around specific tasks assigned to each team member. We have divided the project into key areas—Server, Client, and Library code—with each area having its own set of tasks and sub-tasks.
 ### Server Tasks (Matthew Hill)
 - **Creating the Server**: Setting up server infrastructure & ensuring it can handle multiple client connections.  
-  _Estimated time: 2 days._
+  _Time taken: 1 hour._
 - **Name Verification**: Implementing functionality to verify and manage unique client nicknames.  
-  _Estimated time: 2 hours._
+  _Time taken: 3 hours._
 - **Handling Multiple Connections**: Ensuring the server can efficiently manage simultaneous client connections.  
-  _Estimated time: 6-8 hours._
+  _Time taken: 12 hours._
 - **Graceful Shutdown**: Developing a mechanism for the server to shut down gracefully, including sending notifications to all connected clients.  
-  _Estimated time: 2 hours._
+  _Time taken: 1/2 hour._
 ### Client Tasks (R-E Miller)
 - **Connecting to Server**: Establishing a reliable connection to the server.  
-  _Estimated time: 1 day._
+  _Time taken: 4 hours._
 - **Nickname Decision**: Enabling clients to choose and confirm a unique nickname.  
-  _Estimated time: 2 hours._
+  _Time taken: 2 hours._
 - **Message Sending and Receiving**: Facilitating the sending and receiving of messages through the client interface.  
-  _Estimated time: 1 day._
+  _Time taken: 3 hours._
 - **Disconnecting**: Implementing a smooth and user-friendly disconnection process.  
-  _Estimated time: 4 hours._
+  _Time taken: 2 hours._
+- **Debugging**: Fixing any bugs or issues that came up.  
+  _Time taken: 3 hours._
 ### Library Code/Curses Integration (Elliot Swan)
 - **Encoding/Decoding JSON Packets**: Developing methods to encode and decode messages in JSON format for efficient communication.  
-  _Estimated time: 1 day._
+  _Time taken: 3 hours._
 - **Sending/Receiving JSON Packets**: Establishing protocols for message transmission and reception.  
-  _Estimated time: 1 day._
-- **UI Research and Design in Curses**: Designing and implementing the user interface using the curses library, ensuring a seamless user experience.  
-  _Estimated time: 2 days._
+  _Time taken: 2 hours._
 
 ## Protocol
 ### Network Socket Specifications
