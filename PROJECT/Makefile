@@ -1,14 +1,15 @@
-# Refer to https://stackoverflow.com/questions/6273608/how-to-pass-argument-to-makefile-from-command-line
-
-.PHONY: all server client
-
 all: server client
 
 server:
-	python3 server.py localhost $(filter-out $@,$(MAKECMDGOALS))
+	cp server.py server
+	chmod u+x server
 
 client:
-	python3 client.py $(filter-out $@,$(MAKECMDGOALS))
-
-
-
+	cp client.py client
+	chmod u+x client
+	
+.PHONY: clean
+	
+clean:
+	rm -rf client
+	rm -rf server
