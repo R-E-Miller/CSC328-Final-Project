@@ -52,8 +52,10 @@ Our project is structured around specific tasks assigned to each team member. We
   _Time taken: 2 hours._
 - **Debugging**: Fixing any bugs or issues that came up.  
   _Time taken: 3 hours._
+  - **Makefile**: Create Makefile.  
+  _Time taken: 1 hour._
   
-### Library Code/Curses Integration (Elliot Swan)
+### Shared Tasks (Elliot Swan)
 - **Encoding/Decoding JSON Packets**: Developing methods to encode and decode messages in JSON format for efficient communication.  
   _Time taken: 3 hours._
 - **Sending/Receiving JSON Packets**: Establishing protocols for message transmission and reception.  
