@@ -73,7 +73,7 @@ def main():
             # Wait for HELLO message from the server
             print("Attemping to read from server...")
             serverName, hello_message, proto = sh.read_message(sock)
-            if "HELLO" in hello_message:
+            if proto == 'connect':
                 print(hello_message)
             else:
                 print("Did not receive HELLO...")
@@ -86,10 +86,10 @@ def main():
                     proto = 'verify' 
                     sh.send_message(sock, nickname, None, proto)
                     serverName, response, proto = sh.read_message(sock)
-                    if response == "READY":
+                    if proto == "ready":
                         print(response)
                         break
-                    elif response == "RETRY":
+                    elif proto == "retry":
                         print(response)
                     else:
                         print("Error: Unexpected response from server!")

@@ -77,11 +77,11 @@ def proto_handle(nick, message, proto, connectionList, readySock, nickname, file
     match proto:
         case "verify":
             if message not in nickname:
-                sh.send_message(readySock, "READY", myNick, 'verify')
+                sh.send_message(readySock, "READY", myNick, 'ready')
                 nickname.append(message)
                 print(f"{datetime.now()}: {connectioninfo[connection][0]}: {message} ", file = file_log, flush = True)
             else: 
-                sh.send_message(readySock, "RETRY", myNick, 'verify')
+                sh.send_message(readySock, "RETRY", myNick, 'retry')
         case "broadcast":
             print("Broadcasting")
             broadcast(nick, message, proto, connectionList)
