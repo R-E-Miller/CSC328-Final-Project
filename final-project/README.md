@@ -118,6 +118,7 @@ The program utilizes JSON packets for concise and structured data exchange. A pa
 - **Client Disconnection:** It is assumed that the client ALWAYS disconnects using "CTRL-C", and does not just "X" out of the window.
 - **Communication:** Clients and the server communicate using TCP/IP sockets.
 - **Text:** Clients and the server support plain text messaging.
+- **Closed Server:** It can be assumed that the client will crash if you attempt to write to a closed/disconnected server.
 
 ## Discussion on Development Process
 The project went pretty well. There was a struggle after the server was first started, particularly with handling multiple clients. We initially wanted to use threads but switched to select to avoid race conditions. Once we figured out how to use select, the rest of the server implementation went well. The client-side was straightforward as we used threads to handle reading. The protocol for different cases, whether broadcasting to everyone, selecting a unique username, or leaving, made the project function well overall. Elliot's shared library was integral as it allowed us to easily read and write messages by calling his functions that created and decoded JSON packets. The main challenge was learning how to work with JSON packets, but we overcame this quickly.
