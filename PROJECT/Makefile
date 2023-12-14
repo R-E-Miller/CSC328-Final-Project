@@ -5,7 +5,7 @@
 all: server client
 
 server:
-	python3 server.py $(filter-out $@,$(MAKECMDGOALS))
+	python3 server.py localhost $(filter-out $@,$(MAKECMDGOALS))
 
 client:
 	python3 client.py $(filter-out $@,$(MAKECMDGOALS))
