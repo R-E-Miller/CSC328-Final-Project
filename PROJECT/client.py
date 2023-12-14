@@ -34,7 +34,6 @@ running = True
 # Parameters:  sock - the socket to read messages from - Input                #
 # Return Value: None                                                          #
 ###############################################################################
-
 def reader_thread(sock, my_nickname):
 
     global running
@@ -57,7 +56,6 @@ def reader_thread(sock, my_nickname):
 # Parameters:  None                                                           #
 # Return Value: None                                                          #
 ###############################################################################
-
 def main():
 
     if len(sys.argv) != 3:
