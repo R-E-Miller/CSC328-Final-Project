@@ -42,11 +42,12 @@ def reader_thread(sock, my_nickname):
         if myConnection:
             nick, message, proto = sh.read_message(sock)
             if message == "Connection closed" or proto == 'shutdown':
-                sock.close()
+                print(f'{nick}: {message}')
+                #sock.close()
                 break
             if nick != my_nickname:  # Only print messages from other users
                 print(f"{nick}: {message}")
-
+    running = False
 ###############################################################################
 # Function name: main                                                         #
 # Description: Main function to run the client. Connects to the server,       #

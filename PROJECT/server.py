@@ -74,31 +74,30 @@ def send_hello(s):
 #             array File descriptors myConnectionsSetup - all of the sockets that the clients are connected to - input
 ###############################################################################################
 def proto_handle(nick, message, proto, connectionList, readySock, nickname, file_log, connectioninfo, connection, myNick, myConnectionsSetup):
-    match proto:
-        case "verify":
-            if message not in nickname:
-                sh.send_message(readySock, "READY", myNick, 'ready')
-                nickname.append(message)
-                print(f"{datetime.now()}: {connectioninfo[connection][0]}: {message} ", file = file_log, flush = True)
-            else: 
-                sh.send_message(readySock, "RETRY", myNick, 'retry')
-        case "broadcast":
-            print("Broadcasting")
-            broadcast(nick, message, proto, connectionList)
-            log_mess(nick, message, proto, file_log)
-        case "goodbye":
-            disc = f"{nick} disconnected"
-            broadcast(myNick, disc, proto, connectionList)
-            myConnectionsSetup.remove(readySock)
-            connectionList.remove(readySock)
-            nickname.remove(nick)
-            readySock.close()
-        case None:
-            myConnectionsSetup.remove(readySock)
-            connectionList.remove(readySock)
-            #NOTE: we need to make a dictionary in case something like this ever happens, map connections to the name
-            #nickname.remove(nick)
-            readySock.close()
+    if proto == "verify":
+        if message not in nickname:
+            sh.send_message(readySock, "READY", myNick, 'ready')
+            nickname.append(message)
+            print(f"{datetime.now()}: {connectioninfo[connection][0]}: {message} ", file = file_log, flush = True)
+        else: 
+            sh.send_message(readySock, "RETRY", myNick, 'retry')
+    if proto == "broadcast":
+        print("Broadcasting")
+        broadcast(nick, message, proto, connectionList)
+        log_mess(nick, message, proto, file_log)
+    if proto == "goodbye":
+        disc = f"{nick} disconnected"
+        broadcast(myNick, disc, proto, connectionList)
+        myConnectionsSetup.remove(readySock)
+        connectionList.remove(readySock)
+        nickname.remove(nick)
+        readySock.close()
+    if proto == None:
+        myConnectionsSetup.remove(readySock)
+        connectionList.remove(readySock)
+        #NOTE: we need to make a dictionary in case something like this ever happens, map connections to the name
+        #nickname.remove(nick)
+        readySock.close()
 
 ###############################################################################################
 # Function Name: main
