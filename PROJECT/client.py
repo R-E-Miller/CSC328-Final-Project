@@ -35,16 +35,19 @@ running = True
 # Return Value: None                                                          #
 ###############################################################################
 
-def reader_thread(sock):
+def reader_thread(sock, my_nickname):
 
     global running
     while running:
         myConnection = select.select([sock], [], [], 0)
         if myConnection:
             nick, message, proto = sh.read_message(sock)
-            if message == "Connection closed":
+            if message == "Connection closed" or proto == 'shutdown':
+                running = False  # Set running to False to stop the main loop
+                print(f"Server Shutdown Message: {message}")
                 break
-            print(f"{nick} said {message}")
+            if nick != my_nickname:  # Only print messages from other users
+                print(f"{nick} said {message}")
 
 ###############################################################################
 # Function name: main                                                         #
@@ -95,11 +98,13 @@ def main():
                         print("Error: Unexpected response from server!")
                         continue
                         
-            read_Thread = threading.Thread(target=reader_thread, args=[sock])
+            read_Thread = threading.Thread(target=reader_thread, args=[sock, nickname])
             read_Thread.start()
             
-            while True:
+            while running:  # Use the running flag to control the loop
                 myMessage = input()
+                if not running:  # Check if the thread has set running to False
+                    break
                 if myMessage.strip():  # Check if message is not just whitespace
                     sh.send_message(sock, myMessage, nickname, "broadcast")
 
