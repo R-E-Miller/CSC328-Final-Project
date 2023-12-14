@@ -43,6 +43,7 @@ def reader_thread(sock, my_nickname):
         if myConnection:
             nick, message, proto = sh.read_message(sock)
             if message == "Connection closed" or proto == 'shutdown':
+                sock.close()
                 break
             if nick != my_nickname:  # Only print messages from other users
                 print(f"{nick} said {message}")
