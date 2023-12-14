@@ -101,13 +101,6 @@ The program utilizes JSON packets for concise and structured data exchange. A pa
    - Handle unexpected disconnections and clean up resources.
 4. **Server Shutdown**:
    - Broadcast `Server Shutting down in 5 seconds` with `proto = 'shutdown'`.
-### Current Status
-- Both server and client operate in terminal interface.
-- Supports asynchronous client connections, unique nicknames, and broadcasting chat messages.
-- Graceful and non-graceful client shutdowns are managed.
-- Known issues:
-  - Client input can be disrupted by incoming messages, which could be improved with a TUI implementation.
-  - Server shutdown allows for client preparation.
 
 ## Assumptions
 - **Network Environment:** Assumes a stable network connection for uninterrupted client-server communication.
@@ -123,6 +116,8 @@ The program utilizes JSON packets for concise and structured data exchange. A pa
 - **Open Network Port:** Assumes the specified server port is open and not blocked by network security measures.
 - **GitHub Repository:** The GitHub repository (found at https://github.com/R-E-Miller/CSC328-Final-Project) is assumed to be public so that the professor can view it as we make progress.
 - **Client Disconnection:** It is assumed that the client ALWAYS disconnects using "CTRL-C", and does not just "X" out of the window.
+- **Communication:** Clients and the server communicate using TCP/IP sockets.
+- **Text:** Clients and the server support plain text messaging.
 
 ## Discussion on Development Process
 The project went pretty well. There was a struggle after the server was first started, particularly with handling multiple clients. We initially wanted to use threads but switched to select to avoid race conditions. Once we figured out how to use select, the rest of the server implementation went well. The client-side was straightforward as we used threads to handle reading. The protocol for different cases, whether broadcasting to everyone, selecting a unique username, or leaving, made the project function well overall. Elliot's shared library was integral as it allowed us to easily read and write messages by calling his functions that created and decoded JSON packets. The main challenge was learning how to work with JSON packets, but we overcame this quickly.
