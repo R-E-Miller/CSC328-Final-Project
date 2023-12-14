@@ -1,6 +1,0 @@
-Python: A versatile programming language suitable for a variety of applications.
-JSON: Used for data interchange between client and server.
-curses Library: Useful for creating text-based user interfaces.
-Multiprocessing and Threads: For handling multiple client connections and concurrent tasks.
-Pipes: Can be used for inter-process communication.
-Sockets: Core to network communication, for client and server connections.
