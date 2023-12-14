@@ -43,8 +43,6 @@ def reader_thread(sock, my_nickname):
         if myConnection:
             nick, message, proto = sh.read_message(sock)
             if message == "Connection closed" or proto == 'shutdown':
-                running = False  # Set running to False to stop the main loop
-                print(f"Server Shutdown Message: {message}")
                 break
             if nick != my_nickname:  # Only print messages from other users
                 print(f"{nick} said {message}")
@@ -98,13 +96,11 @@ def main():
                         print("Error: Unexpected response from server!")
                         continue
                         
-            read_Thread = threading.Thread(target=reader_thread, args=[sock, nickname])
+            read_Thread = threading.Thread(target=reader_thread, args=(sock, nickname))
             read_Thread.start()
             
-            while running:  # Use the running flag to control the loop
+            while True:
                 myMessage = input()
-                if not running:  # Check if the thread has set running to False
-                    break
                 if myMessage.strip():  # Check if message is not just whitespace
                     sh.send_message(sock, myMessage, nickname, "broadcast")
 
